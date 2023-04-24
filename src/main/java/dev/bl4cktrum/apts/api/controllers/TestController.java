@@ -1,25 +1,20 @@
 package dev.bl4cktrum.apts.api.controllers;
 
-import dev.bl4cktrum.apts.api.models.entities.Relevant;
-import dev.bl4cktrum.apts.api.models.requests.UserCreateRequest;
-import dev.bl4cktrum.apts.api.services.RelevantService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/test")
+@RequestMapping("/api/v1/test")
 public class TestController {
-    private final RelevantService relevantService;
 
-    public TestController(RelevantService relevantService) {
-        this.relevantService = relevantService;
+    @GetMapping("/auth-needed")
+    public ResponseEntity<String> test(){
+        return ResponseEntity.ok("hello authenticated world.");
     }
 
-    @PostMapping
-    public ResponseEntity<Relevant> createUser(@RequestBody UserCreateRequest userCreateRequest){
-        return ResponseEntity.ok(relevantService.createUser(userCreateRequest));
+
+    @GetMapping("/auth-not-needed")
+    public ResponseEntity<String> testTwo(){
+        return ResponseEntity.ok("hello not authenticated world.");
     }
 }

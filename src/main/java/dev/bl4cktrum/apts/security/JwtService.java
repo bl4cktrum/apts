@@ -7,6 +7,7 @@ import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.stereotype.Service;
 
 import java.security.Key;
 import java.util.Date;
@@ -15,13 +16,14 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.function.Function;
 
+@Service
 public class JwtService {
 
     @Value("${apts.app.jwt-secret}")
-    private static String SECRET_KEY;
+    private String SECRET_KEY;
 
     @Value("${bezkoder.app.jwt-expiration-ms}")
-    private static int EXPIRATION_MS;
+    private int EXPIRATION_MS;
     public String extractUserEmail(String token) {
         return extractClaim(token,Claims::getSubject);
     }
