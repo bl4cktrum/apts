@@ -7,8 +7,8 @@ import lombok.NoArgsConstructor;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
-@Entity(name = "patient")
 @NoArgsConstructor
+@Entity(name = "patients")
 public class Patient extends BaseEntity {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "patient")
     private Set<Location> locations;

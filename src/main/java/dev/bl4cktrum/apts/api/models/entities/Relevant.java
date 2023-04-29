@@ -18,7 +18,7 @@ import java.util.Set;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity
+@Entity(name = "relevants")
 public class Relevant extends BaseEntity implements UserDetails {
     @Email
     @NotBlank

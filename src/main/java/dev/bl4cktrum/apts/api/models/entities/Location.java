@@ -7,7 +7,7 @@ import jakarta.persistence.ManyToOne;
 import lombok.NoArgsConstructor;
 
 @NoArgsConstructor
-@Entity(name = "location")
+@Entity(name = "locations")
 public class Location extends BaseEntity {
     @ManyToOne
     @JoinColumn(name = "patient_id",nullable = false)
