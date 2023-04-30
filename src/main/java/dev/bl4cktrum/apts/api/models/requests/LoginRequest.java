@@ -1,17 +1,17 @@
 package dev.bl4cktrum.apts.api.models.requests;
 
 import jakarta.validation.constraints.Email;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
+import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
-import lombok.NoArgsConstructor;
+//import lombok.AllArgsConstructor;
+//import lombok.Builder;
+//import lombok.NoArgsConstructor;
 
 @Data
-@Builder
-@AllArgsConstructor
-@NoArgsConstructor
 public class LoginRequest {
+    @NotBlank()
     @Email(message = "Invalid Email")
     private String email;
+    @NotBlank()
     String password;
 }

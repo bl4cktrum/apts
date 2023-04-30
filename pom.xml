@@ -91,6 +91,18 @@
 			<artifactId>liquibase-maven-plugin</artifactId>
 			<version>4.20.0</version>
 		</dependency>
+
+		<!-- Postgis Dialect-->
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-spatial</artifactId>
+			<version>6.1.7.Final</version>
+		</dependency>
+		<dependency>
+			<groupId>net.postgis</groupId>
+			<artifactId>postgis-geometry</artifactId>
+			<version>2021.1.0</version>
+		</dependency>
 	</dependencies>
 
 	<build>
