@@ -11,6 +11,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -30,8 +31,8 @@ public class Relevant extends BaseEntity implements UserDetails {
     @Size(max = 120)
     private String password;
 
-    @ManyToMany(mappedBy = "relevants")
-    private Set<Patient> patients;
+    @OneToMany(mappedBy = "relevant")
+    private Set<PatientRelevant> relevantPatients = new LinkedHashSet<>();
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

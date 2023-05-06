@@ -14,14 +14,16 @@ import java.util.Set;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity(name = "patients")
-public class Patient extends BaseEntity {
-    @Column
-    private String name;
+@Entity(name = "patient_relevant")
+public class PatientRelevant extends BaseEntity {
+    @ManyToOne
+    @JoinColumn(name = "relevant_id")
+    private Relevant relevant;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "patient")
-    private Set<Location> locations;
+    @ManyToOne
+    @JoinColumn(name = "patient_id")
+    private Patient patient;
 
-    @OneToMany(mappedBy = "patient")
-    private Set<PatientRelevant> relevants = new LinkedHashSet<>();
+    @OneToMany(mappedBy = "patientRelevant")
+    private Set<Restriction> restrictions = new LinkedHashSet<>();
 }
