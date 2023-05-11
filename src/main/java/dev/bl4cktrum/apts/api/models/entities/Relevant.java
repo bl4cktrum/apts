@@ -31,8 +31,8 @@ public class Relevant extends BaseEntity implements UserDetails {
     @Size(max = 120)
     private String password;
 
-    @OneToMany(mappedBy = "relevant")
-    private Set<PatientRelevant> relevantPatients = new LinkedHashSet<>();
+    @OneToMany(mappedBy = "relevant", fetch = FetchType.EAGER)
+    private Set<PatientRelevant> patients = new LinkedHashSet<>();
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

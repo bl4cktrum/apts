@@ -21,7 +21,7 @@ public class PatientRelevant extends BaseEntity {
     private Relevant relevant;
 
     @ManyToOne
-    @JoinColumn(name = "patient_id")
+    @JoinColumn(name = "patient_id",referencedColumnName = "id")
     private Patient patient;
 
     @OneToMany(mappedBy = "patientRelevant")

@@ -22,15 +22,15 @@ public abstract class BaseEntity {
     private Date deleted_at;
 
     @PrePersist
-    public void updateCreatedAt(){
+    public void onCreate(){
         this.created_at = new Date();
     }
     @PreUpdate
-    public void updateUpdatedAt(){
+    public void onUpdate(){
         this.updated_at = new Date();
     }
     @PreRemove
-    public void updateDeletedAt(){
+    public void onDelete(){
         this.deleted_at = new Date();
     }
 }

@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 
 import java.util.LinkedHashSet;
 import java.util.Set;
+import java.util.UUID;
 
 @Data
 @Builder
@@ -18,6 +19,9 @@ import java.util.Set;
 public class Patient extends BaseEntity {
     @Column
     private String name;
+
+    @Column(name = "device_id",unique = true)
+    private UUID deviceId;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "patient")
     private Set<Location> locations;

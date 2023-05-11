@@ -20,7 +20,7 @@ import java.util.Date;
 @Entity(name = "locations")
 public class Location extends BaseEntity {
     @ManyToOne
-    @JoinColumn(name = "patient_id",nullable = false)
+    @JoinColumn(name = "patient_id",referencedColumnName = "id",nullable = false)
     private Patient patient;
 
     @Column
