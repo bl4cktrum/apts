@@ -1,4 +1,4 @@
-package dev.bl4cktrum.apts.security.config;
+package dev.bl4cktrum.apts.config;
 
 import dev.bl4cktrum.apts.api.repositories.RelevantRepository;
 import lombok.RequiredArgsConstructor;

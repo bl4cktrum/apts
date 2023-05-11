@@ -30,6 +30,7 @@ public class Restriction extends BaseEntity {
     @JoinColumn(name = "preference_id",nullable = false)
     private Preference preference;
 
+
     @Override
     public void onCreate(){
              super.onCreate();
@@ -39,4 +40,5 @@ public class Restriction extends BaseEntity {
                 .senSmsNotifications(true)
                 .build();
     }
+    //TODO: TEST THIS
 }

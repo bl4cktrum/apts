@@ -1,4 +1,4 @@
-package dev.bl4cktrum.apts.security.config;
+package dev.bl4cktrum.apts.config;
 
 import dev.bl4cktrum.apts.security.JwtAuthenticationFilter;
 import lombok.RequiredArgsConstructor;
@@ -29,8 +29,7 @@ public class SecurityConfig {
                     "/api/v1/test/polygon-create",
                     "/swagger-ui/**",
                     "/v3/api-docs/**",
-                    "/error",
-                    "/api/v1/patient")
+                    "/error")
             .permitAll()
             .anyRequest()
             .authenticated()
