@@ -1,7 +1,6 @@
 package dev.bl4cktrum.apts.api.models.entities;
 
 import dev.bl4cktrum.apts.infrastructure.abstracts.BaseEntity;
-import dev.bl4cktrum.apts.infrastructure.enums.RestrictionType;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -17,28 +16,23 @@ import org.hibernate.annotations.CascadeType;
 @Entity(name = "restrictions")
 public class Restriction extends BaseEntity {
     @Column
-    private boolean is_active;
+    private String name;
+
+    @Column
+    private boolean is_active = true;
 
     @ManyToOne
     private PatientRelevant patientRelevant;
 
-    @Enumerated(EnumType.STRING)
-    private RestrictionType restrictionType;
 
     @OneToOne
     @Cascade(CascadeType.PERSIST)
     @JoinColumn(name = "preference_id",nullable = false)
-    private Preference preference;
+    private Preference preference = Preference.builder()
+            .restriction(this)
+            .sendPushNotification(true)
+            .senSmsNotifications(true)
+            .build();
 
-
-    @Override
-    public void onCreate(){
-             super.onCreate();
-             this.preference = Preference.builder()
-                .restriction(this)
-                .sendPushNotification(true)
-                .senSmsNotifications(true)
-                .build();
-    }
     //TODO: TEST THIS
 }
