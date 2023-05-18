@@ -15,12 +15,14 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
-@Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity(name = "relevants")
 public class Relevant extends BaseEntity implements UserDetails {
+    @OneToMany(mappedBy = "relevant", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private Set<PatientRelevant> patientRelevants = new LinkedHashSet<>();
+
     @Email
     @NotBlank
     @Column(unique = true)
@@ -31,8 +33,10 @@ public class Relevant extends BaseEntity implements UserDetails {
     @Size(max = 120)
     private String password;
 
-    @OneToMany(mappedBy = "relevant", fetch = FetchType.EAGER)
-    private Set<PatientRelevant> patients = new LinkedHashSet<>();
+    public void addPatientRelevant(PatientRelevant pr){
+        this.patientRelevants.add(pr);
+        pr.setRelevant(this);
+    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

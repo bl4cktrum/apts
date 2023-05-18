@@ -2,14 +2,12 @@ package dev.bl4cktrum.apts.api.models.entities;
 
 import dev.bl4cktrum.apts.infrastructure.abstracts.BaseEntity;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
 
-@Data
+@Getter
+@Setter
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
@@ -26,13 +24,11 @@ public class Restriction extends BaseEntity {
 
 
     @OneToOne
-    @Cascade(CascadeType.PERSIST)
+    @Cascade(CascadeType.ALL)
     @JoinColumn(name = "preference_id",nullable = false)
     private Preference preference = Preference.builder()
             .restriction(this)
             .sendPushNotification(true)
             .senSmsNotifications(true)
             .build();
-
-    //TODO: TEST THIS
 }

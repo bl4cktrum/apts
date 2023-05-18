@@ -29,8 +29,7 @@ public class SecurityConfig {
                     "/api/v1/test/polygon-create",
                     "/swagger-ui/**",
                     "/v3/api-docs/**",
-                    "/error",
-                    "/api/v1/restriction/**")
+                    "/error")
             .permitAll()
             .anyRequest()
             .authenticated()

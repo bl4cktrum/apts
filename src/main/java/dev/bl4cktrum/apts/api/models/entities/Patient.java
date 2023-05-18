@@ -2,16 +2,14 @@ package dev.bl4cktrum.apts.api.models.entities;
 
 import dev.bl4cktrum.apts.infrastructure.abstracts.BaseEntity;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.UUID;
 
-@Data
+@Getter
+@Setter
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
@@ -23,9 +21,9 @@ public class Patient extends BaseEntity {
     @Column(name = "device_id",unique = true)
     private UUID deviceId;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "patient")
+    @OneToMany(mappedBy = "patient", cascade = CascadeType.ALL)
     private Set<Location> locations;
 
-    @OneToMany(mappedBy = "patient")
-    private Set<PatientRelevant> relevants = new LinkedHashSet<>();
+    @OneToMany(mappedBy = "patient", cascade = CascadeType.ALL)
+    private Set<PatientRelevant> patientRelevants = new LinkedHashSet<>();
 }

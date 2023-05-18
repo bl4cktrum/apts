@@ -1,16 +1,15 @@
 package dev.bl4cktrum.apts.api.models.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import dev.bl4cktrum.apts.infrastructure.abstracts.BaseEntity;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.LinkedHashSet;
 import java.util.Set;
 
-@Data
+@Getter
+@Setter
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
@@ -18,12 +17,14 @@ import java.util.Set;
 public class PatientRelevant extends BaseEntity {
     @ManyToOne
     @JoinColumn(name = "relevant_id")
+    @JsonIgnore
     private Relevant relevant;
 
     @ManyToOne
-    @JoinColumn(name = "patient_id",referencedColumnName = "id")
+    @JoinColumn(name = "patient_id")
+    @JsonIgnore
     private Patient patient;
 
-    @OneToMany(mappedBy = "patientRelevant")
+    @OneToMany(mappedBy = "patientRelevant", cascade = CascadeType.ALL)
     private Set<Restriction> restrictions = new LinkedHashSet<>();
 }
