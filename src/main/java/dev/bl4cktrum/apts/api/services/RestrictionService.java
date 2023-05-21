@@ -4,6 +4,7 @@ import dev.bl4cktrum.apts.api.exceptions.ApiException;
 import dev.bl4cktrum.apts.api.models.entities.*;
 import dev.bl4cktrum.apts.api.models.requests.CircleRestrictionCreateRequest;
 import dev.bl4cktrum.apts.api.models.requests.PolygonRestrictionCreateRequest;
+import dev.bl4cktrum.apts.api.models.requests.PreferenceUpdateRequest;
 import dev.bl4cktrum.apts.api.repositories.*;
 import lombok.RequiredArgsConstructor;
 import org.locationtech.jts.geom.Coordinate;
@@ -19,6 +20,7 @@ import org.springframework.transaction.annotation.Transactional;
 @RequiredArgsConstructor
 public class RestrictionService {
     private final RestrictionRepository restrictionRepository;
+    private final PreferenceRepository preferenceRepository;
 
     @Transactional
     public void polygonRestrictionCreate(PolygonRestrictionCreateRequest request) {
@@ -92,6 +94,20 @@ public class RestrictionService {
     }
 
     public void activationUpdate(String restrictionId, boolean isActive) {
+        Restriction restriction = getRestriction(restrictionId);
+        restriction.set_active(isActive);
+        restrictionRepository.save(restriction);
+    }
+
+    public void preferenceUpdate(String restrictionId, PreferenceUpdateRequest request) {
+        Restriction restriction = getRestriction(restrictionId);
+        Preference preference = restriction.getPreference();
+        preference.setSendPushNotification(request.isSendPushNotification());
+        preference.setSendSmsNotifications(request.isSendSmsNotifications());
+        preferenceRepository.save(preference);
+    }
+
+    private Restriction getRestriction(String restrictionId) {
         Restriction restriction = restrictionRepository.findById(restrictionId).orElseThrow(
                 ()-> {throw new ApiException("Restriction not found");}
         );
@@ -99,8 +115,6 @@ public class RestrictionService {
                 ((Relevant)SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getId()
         ))
             throw new ApiException("Not granted to modify this restriction");
-
-        restriction.set_active(isActive);
-        restrictionRepository.save(restriction);
+        return restriction;
     }
 }

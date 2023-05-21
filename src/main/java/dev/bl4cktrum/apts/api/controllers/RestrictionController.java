@@ -2,6 +2,7 @@ package dev.bl4cktrum.apts.api.controllers;
 
 import dev.bl4cktrum.apts.api.models.requests.CircleRestrictionCreateRequest;
 import dev.bl4cktrum.apts.api.models.requests.PolygonRestrictionCreateRequest;
+import dev.bl4cktrum.apts.api.models.requests.PreferenceUpdateRequest;
 import dev.bl4cktrum.apts.api.services.RestrictionService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
@@ -41,5 +42,14 @@ public class RestrictionController {
             @RequestParam boolean isActive){
         restrictionService.activationUpdate(restrictionId, isActive);
         return ResponseEntity.ok("Activation had been updated successfully");
+    }
+
+    @PutMapping("/{restriction_id}/preference")
+    @Operation(summary = "Updates a preference of a restriction")
+    public ResponseEntity<String> preferenceUpdate(
+            @PathVariable(name = "restriction_id") String restrictionId,
+            @Valid @RequestBody PreferenceUpdateRequest request){
+        restrictionService.preferenceUpdate(restrictionId, request);
+        return ResponseEntity.ok("Preference had been updated successfully");
     }
 }
