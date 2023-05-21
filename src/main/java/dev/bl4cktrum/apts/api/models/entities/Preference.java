@@ -1,5 +1,6 @@
 package dev.bl4cktrum.apts.api.models.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import dev.bl4cktrum.apts.infrastructure.abstracts.BaseEntity;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -13,12 +14,13 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Entity(name = "preferences")
 public class Preference extends BaseEntity {
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "restriction_id",nullable = false)
+    @JsonIgnore
+    Restriction restriction;
+
     @Column(name = "sms_notification")
-    private boolean senSmsNotifications = true;
+    private boolean sendSmsNotifications = true;
     @Column(name = "push_notification")
     private boolean sendPushNotification = true;
-
-    @OneToOne
-    @JoinColumn(name = "restriction_id",nullable = false)
-    private Restriction restriction;
 }

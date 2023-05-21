@@ -1,5 +1,6 @@
 package dev.bl4cktrum.apts.api.models.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import dev.bl4cktrum.apts.infrastructure.abstracts.BaseEntity;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -16,8 +17,9 @@ import java.time.Duration;
 @Entity(name = "passivity_restrictions")
 @DiscriminatorValue("passivity")
 public class PassivityRestriction extends BaseEntity{
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "restriction_id")
+    @JsonIgnore
     Restriction restriction;
 
     @Column

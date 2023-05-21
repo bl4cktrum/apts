@@ -1,5 +1,6 @@
 package dev.bl4cktrum.apts.api.models.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import dev.bl4cktrum.apts.infrastructure.abstracts.BaseEntity;
 import jakarta.persistence.*;
 import lombok.*;
@@ -13,22 +14,30 @@ import org.hibernate.annotations.CascadeType;
 @AllArgsConstructor
 @Entity(name = "restrictions")
 public class Restriction extends BaseEntity {
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "patient_relevant_id", nullable = false)
+    @JsonIgnore
+    private PatientRelevant patientRelevant;
+
     @Column
     private String name;
 
     @Column
     private boolean is_active = true;
 
-    @ManyToOne
-    private PatientRelevant patientRelevant;
-
-
-    @OneToOne
     @Cascade(CascadeType.ALL)
-    @JoinColumn(name = "preference_id",nullable = false)
-    private Preference preference = Preference.builder()
-            .restriction(this)
-            .sendPushNotification(true)
-            .senSmsNotifications(true)
-            .build();
+    @OneToOne(fetch = FetchType.EAGER, mappedBy = "restriction")
+    private Preference preference;
+
+    @Cascade(CascadeType.ALL)
+    @OneToOne(fetch = FetchType.EAGER, mappedBy = "restriction")
+    private PolygonRestriction polygonRestriction;
+
+    @Cascade(CascadeType.ALL)
+    @OneToOne(fetch = FetchType.EAGER, mappedBy = "restriction")
+    private CircleRestriction circleRestriction;
+
+    @Cascade(CascadeType.ALL)
+    @OneToOne(fetch = FetchType.EAGER, mappedBy = "restriction")
+    private PassivityRestriction passivityRestriction;
 }

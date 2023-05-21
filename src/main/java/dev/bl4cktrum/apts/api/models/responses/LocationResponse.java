@@ -5,7 +5,7 @@ import lombok.Data;
 
 @Data
 @Builder
-public class ApiResponse {
+public class LocationResponse {
+
     private String message;
-    private Object data;
 }

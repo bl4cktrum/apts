@@ -1,5 +1,6 @@
 package dev.bl4cktrum.apts.infrastructure.abstracts;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -17,8 +18,11 @@ public abstract class BaseEntity {
     @Column(name = "id", nullable = true)
     public String id;
 
+    @JsonIgnore
     private Date created_at;
+    @JsonIgnore
     private Date updated_at;
+    @JsonIgnore
     private Date deleted_at;
 
     @PrePersist

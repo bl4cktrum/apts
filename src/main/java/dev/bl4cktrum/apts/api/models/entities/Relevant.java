@@ -15,12 +15,14 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
+@Getter
+@Setter
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity(name = "relevants")
 public class Relevant extends BaseEntity implements UserDetails {
-    @OneToMany(mappedBy = "relevant", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "relevant", fetch = FetchType.EAGER)
     private Set<PatientRelevant> patientRelevants = new LinkedHashSet<>();
 
     @Email

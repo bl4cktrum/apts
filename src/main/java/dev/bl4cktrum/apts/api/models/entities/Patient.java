@@ -15,15 +15,17 @@ import java.util.UUID;
 @AllArgsConstructor
 @Entity(name = "patients")
 public class Patient extends BaseEntity {
-    @Column
-    private String name;
-
     @Column(name = "device_id",unique = true)
     private UUID deviceId;
 
     @OneToMany(mappedBy = "patient", cascade = CascadeType.ALL)
     private Set<Location> locations;
 
-    @OneToMany(mappedBy = "patient", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "patient")
     private Set<PatientRelevant> patientRelevants = new LinkedHashSet<>();
+
+    public void addPatientRelevant(PatientRelevant pr){
+        this.patientRelevants.add(pr);
+        pr.setPatient(this);
+    }
 }
