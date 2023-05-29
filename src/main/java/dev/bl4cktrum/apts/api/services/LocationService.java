@@ -107,19 +107,20 @@ public class LocationService {
         GeometryFactory geometryFactory = new GeometryFactory();
         Point point = geometryFactory.createPoint(coordinate);
 
-        Location location = Location.builder()
+        Location newLocation = Location.builder()
                 .patient(patient)
                 .location(point)
                 .date(new Date())
                 .isLast(true)
                 .build();
-        locationRepository.save(location);
 
-        Set<Location> locations = patient.getLocations().stream().filter(location1 -> !location1.id.equals(location.id)).collect(Collectors.toSet());
-        locations.forEach(location1 -> {
-            location1.setLast(false);
-        });
+        Location lastLocation = patient.getLocations().stream()
+                .filter(location ->
+                        location.isLast() &&
+                                !location.id.equals(newLocation.id)).findFirst().orElseThrow();
+        lastLocation.setLast(false);
 
-        locationRepository.saveAll(locations);
+        locationRepository.save(lastLocation);
+        locationRepository.save(newLocation);
     }
 }
