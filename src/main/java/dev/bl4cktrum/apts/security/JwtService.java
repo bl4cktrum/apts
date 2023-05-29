@@ -21,8 +21,8 @@ public class JwtService {
     @Value("${apts.app.jwt-secret}")
     private String SECRET_KEY;
 
-    @Value("${bezkoder.app.jwt-expiration-ms}")
-    private int EXPIRATION_MS;
+    @Value("${apts.app.jwt-expiration-ms}")
+    private long EXPIRATION_MS;
     public String extractUserEmail(String token) {
         return extractClaim(token,Claims::getSubject);
     }

@@ -28,4 +28,7 @@ public class Location extends BaseEntity {
 
     @Column(columnDefinition = "geometry(Point,4326)")
     private Point location;
+
+    @Column
+    private boolean isLast;
 }

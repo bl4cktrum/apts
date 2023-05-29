@@ -1,7 +1,5 @@
 package dev.bl4cktrum.apts.api.controllers;
 
-import dev.bl4cktrum.apts.api.models.requests.LocationRequest;
-import dev.bl4cktrum.apts.api.models.responses.LocationResponse;
 import dev.bl4cktrum.apts.api.models.responses.PatientMatchResponse;
 import dev.bl4cktrum.apts.api.models.requests.MatchRequest;
 import dev.bl4cktrum.apts.api.services.PatientService;
@@ -28,12 +26,5 @@ public class PatientController {
     public ResponseEntity<PatientMatchResponse> match(@Valid @RequestBody MatchRequest request){
         PatientMatchResponse data = relevantService.match(request);
         return ResponseEntity.ok(data);
-    }
-
-    @PostMapping("/current-location")
-    @Operation(summary = "Takes current location")
-    public ResponseEntity<LocationResponse> newLocation(@Valid @RequestBody LocationRequest request){
-        patientService.newLocation(request);
-        return ResponseEntity.ok(LocationResponse.builder().message("Success").build());
     }
 }

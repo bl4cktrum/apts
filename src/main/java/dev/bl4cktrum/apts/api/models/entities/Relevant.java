@@ -10,10 +10,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import java.util.Collection;
-import java.util.LinkedHashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 @Getter
 @Setter
@@ -34,6 +31,9 @@ public class Relevant extends BaseEntity implements UserDetails {
     @NotBlank
     @Size(max = 120)
     private String password;
+
+    @Column()
+    private UUID sessionId;
 
     public void addPatientRelevant(PatientRelevant pr){
         this.patientRelevants.add(pr);

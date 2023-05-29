@@ -27,6 +27,7 @@ public class SecurityConfig {
             .requestMatchers("/api/v1/auth/**",
                     "/api/v1/test/auth-not-needed",
                     "/api/v1/test/polygon-create",
+                    "/api/v1/test/test-curr",
                     "/swagger-ui/**",
                     "/v3/api-docs/**",
                     "/error",

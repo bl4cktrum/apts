@@ -5,7 +5,7 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
                       http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.20.xsd"
         objectQuotingStrategy="QUOTE_ONLY_RESERVED_WORDS">
-    <changeSet id="1684579547773-1" author="BL4CKTRUM (generated)">
+    <changeSet id="1685191449242-1" author="BL4CKTRUM (generated)">
         <createTable tableName="circle_restrictions">
             <column name="id" type="VARCHAR(255)">
                 <constraints nullable="false" primaryKey="true" primaryKeyName="pk_circle_restrictions"/>
@@ -18,7 +18,7 @@
             <column name="radius" type="DOUBLE"/>
         </createTable>
     </changeSet>
-    <changeSet id="1684579547773-2" author="BL4CKTRUM (generated)">
+    <changeSet id="1685191449242-2" author="BL4CKTRUM (generated)">
         <createTable tableName="locations">
             <column name="id" type="VARCHAR(255)">
                 <constraints nullable="false" primaryKey="true" primaryKeyName="pk_locations"/>
@@ -31,7 +31,7 @@
             <column name="location" type="geometry(Point,4326)"/>
         </createTable>
     </changeSet>
-    <changeSet id="1684579547773-3" author="BL4CKTRUM (generated)">
+    <changeSet id="1685191449242-3" author="BL4CKTRUM (generated)">
         <createTable tableName="passivity_restrictions">
             <column name="id" type="VARCHAR(255)">
                 <constraints nullable="false" primaryKey="true" primaryKeyName="pk_passivity_restrictions"/>
@@ -43,7 +43,7 @@
             <column name="duration" type="BIGINT"/>
         </createTable>
     </changeSet>
-    <changeSet id="1684579547773-4" author="BL4CKTRUM (generated)">
+    <changeSet id="1685191449242-4" author="BL4CKTRUM (generated)">
         <createTable tableName="patient_relevant">
             <column name="id" type="VARCHAR(255)">
                 <constraints nullable="false" primaryKey="true" primaryKeyName="pk_patient_relevant"/>
@@ -58,7 +58,7 @@
             <column name="patient_id" type="VARCHAR(255)"/>
         </createTable>
     </changeSet>
-    <changeSet id="1684579547773-5" author="BL4CKTRUM (generated)">
+    <changeSet id="1685191449242-5" author="BL4CKTRUM (generated)">
         <createTable tableName="patients">
             <column name="id" type="VARCHAR(255)">
                 <constraints nullable="false" primaryKey="true" primaryKeyName="pk_patients"/>
@@ -67,9 +67,10 @@
             <column name="updated_at" type="DATETIME"/>
             <column name="deleted_at" type="DATETIME"/>
             <column name="device_id" type="UUID"/>
+            <column name="socket_session_id" type="UUID"/>
         </createTable>
     </changeSet>
-    <changeSet id="1684579547773-6" author="BL4CKTRUM (generated)">
+    <changeSet id="1685191449242-6" author="BL4CKTRUM (generated)">
         <createTable tableName="polygon_restrictions">
             <column name="id" type="VARCHAR(255)">
                 <constraints nullable="false" primaryKey="true" primaryKeyName="pk_polygon_restrictions"/>
@@ -81,7 +82,7 @@
             <column name="polygon" type="geometry(Polygon,4326)"/>
         </createTable>
     </changeSet>
-    <changeSet id="1684579547773-7" author="BL4CKTRUM (generated)">
+    <changeSet id="1685191449242-7" author="BL4CKTRUM (generated)">
         <createTable tableName="preferences">
             <column name="id" type="VARCHAR(255)">
                 <constraints nullable="false" primaryKey="true" primaryKeyName="pk_preferences"/>
@@ -94,7 +95,7 @@
             <column name="push_notification" type="BOOLEAN"/>
         </createTable>
     </changeSet>
-    <changeSet id="1684579547773-8" author="BL4CKTRUM (generated)">
+    <changeSet id="1685191449242-8" author="BL4CKTRUM (generated)">
         <createTable tableName="relevants">
             <column name="id" type="VARCHAR(255)">
                 <constraints nullable="false" primaryKey="true" primaryKeyName="pk_relevants"/>
@@ -107,7 +108,7 @@
             <column name="password" type="VARCHAR(120)"/>
         </createTable>
     </changeSet>
-    <changeSet id="1684579547773-9" author="BL4CKTRUM (generated)">
+    <changeSet id="1685191449242-9" author="BL4CKTRUM (generated)">
         <createTable tableName="restrictions">
             <column name="id" type="VARCHAR(255)">
                 <constraints nullable="false" primaryKey="true" primaryKeyName="pk_restrictions"/>
@@ -120,48 +121,48 @@
             <column name="is_active" type="BOOLEAN"/>
         </createTable>
     </changeSet>
-    <changeSet id="1684579547773-10" author="BL4CKTRUM (generated)">
+    <changeSet id="1685191449242-10" author="BL4CKTRUM (generated)">
         <addUniqueConstraint columnNames="device_id" constraintName="uc_patients_device" tableName="patients"/>
     </changeSet>
-    <changeSet id="1684579547773-11" author="BL4CKTRUM (generated)">
+    <changeSet id="1685191449242-11" author="BL4CKTRUM (generated)">
         <addUniqueConstraint columnNames="email" constraintName="uc_relevants_email" tableName="relevants"/>
     </changeSet>
-    <changeSet id="1684579547773-12" author="BL4CKTRUM (generated)">
+    <changeSet id="1685191449242-12" author="BL4CKTRUM (generated)">
         <addForeignKeyConstraint baseColumnNames="restriction_id" baseTableName="circle_restrictions"
                                  constraintName="FK_CIRCLE_RESTRICTIONS_ON_RESTRICTION" referencedColumnNames="id"
                                  referencedTableName="restrictions"/>
     </changeSet>
-    <changeSet id="1684579547773-13" author="BL4CKTRUM (generated)">
+    <changeSet id="1685191449242-13" author="BL4CKTRUM (generated)">
         <addForeignKeyConstraint baseColumnNames="patient_id" baseTableName="locations"
                                  constraintName="FK_LOCATIONS_ON_PATIENT" referencedColumnNames="id"
                                  referencedTableName="patients"/>
     </changeSet>
-    <changeSet id="1684579547773-14" author="BL4CKTRUM (generated)">
+    <changeSet id="1685191449242-14" author="BL4CKTRUM (generated)">
         <addForeignKeyConstraint baseColumnNames="restriction_id" baseTableName="passivity_restrictions"
                                  constraintName="FK_PASSIVITY_RESTRICTIONS_ON_RESTRICTION" referencedColumnNames="id"
                                  referencedTableName="restrictions"/>
     </changeSet>
-    <changeSet id="1684579547773-15" author="BL4CKTRUM (generated)">
+    <changeSet id="1685191449242-15" author="BL4CKTRUM (generated)">
         <addForeignKeyConstraint baseColumnNames="patient_id" baseTableName="patient_relevant"
                                  constraintName="FK_PATIENT_RELEVANT_ON_PATIENT" referencedColumnNames="id"
                                  referencedTableName="patients"/>
     </changeSet>
-    <changeSet id="1684579547773-16" author="BL4CKTRUM (generated)">
+    <changeSet id="1685191449242-16" author="BL4CKTRUM (generated)">
         <addForeignKeyConstraint baseColumnNames="relevant_id" baseTableName="patient_relevant"
                                  constraintName="FK_PATIENT_RELEVANT_ON_RELEVANT" referencedColumnNames="id"
                                  referencedTableName="relevants"/>
     </changeSet>
-    <changeSet id="1684579547773-17" author="BL4CKTRUM (generated)">
+    <changeSet id="1685191449242-17" author="BL4CKTRUM (generated)">
         <addForeignKeyConstraint baseColumnNames="restriction_id" baseTableName="polygon_restrictions"
                                  constraintName="FK_POLYGON_RESTRICTIONS_ON_RESTRICTION" referencedColumnNames="id"
                                  referencedTableName="restrictions"/>
     </changeSet>
-    <changeSet id="1684579547773-18" author="BL4CKTRUM (generated)">
+    <changeSet id="1685191449242-18" author="BL4CKTRUM (generated)">
         <addForeignKeyConstraint baseColumnNames="restriction_id" baseTableName="preferences"
                                  constraintName="FK_PREFERENCES_ON_RESTRICTION" referencedColumnNames="id"
                                  referencedTableName="restrictions"/>
     </changeSet>
-    <changeSet id="1684579547773-19" author="BL4CKTRUM (generated)">
+    <changeSet id="1685191449242-19" author="BL4CKTRUM (generated)">
         <addForeignKeyConstraint baseColumnNames="patient_relevant_id" baseTableName="restrictions"
                                  constraintName="FK_RESTRICTIONS_ON_PATIENT_RELEVANT" referencedColumnNames="id"
                                  referencedTableName="patient_relevant"/>

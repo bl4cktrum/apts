@@ -76,4 +76,12 @@ public class RelevantService {
         });
         return patientRelevantWithRestrictionsAdapter.fromPatientRelevant(patientRelevant);
     }
+
+    public void setSession(String email, UUID sessionId){
+        Relevant user = relevantRepository.findByEmail(email).orElseThrow(()-> {
+            throw new ApiException("User not found");
+        });
+        user.setSessionId(sessionId);
+        relevantRepository.save(user);
+    }
 }
